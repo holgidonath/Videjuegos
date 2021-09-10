@@ -82,12 +82,12 @@ public class FrogMove : MonoBehaviour
         {
             if(lookingHorizontal == 1)
             {
-                float newposx = (curPos.x + (_movement.x * dt)/10f);
+                float newposx = (curPos.x + (_movement.x * dt)/15f);
                 transform.position = new Vector3(newposx,curPos.y,curPos.z);
             }
             else if (lookingHorizontal == 0)
             {
-            float newposy = (curPos.y + (_movement.y * dt)/10f);
+            float newposy = (curPos.y + (_movement.y * dt)/15f);
             transform.position = new Vector3(curPos.x,newposy,curPos.z);
             }
         }
