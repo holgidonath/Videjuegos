@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 785208126}
   - component: {fileID: 785208128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FroggerSpriteSheet_16
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -299,7 +299,8 @@ GameObject:
   - component: {fileID: 1149291190}
   - component: {fileID: 1149291191}
   - component: {fileID: 1149291192}
-  m_Layer: 0
+  - component: {fileID: 1149291193}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -314,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149291189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -296.4, y: -99.2, z: 0}
+  m_LocalPosition: {x: -229.6, y: -99.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 785208126}
@@ -344,7 +345,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -367,6 +368,27 @@ PolygonCollider2D:
       - {x: 10.288712, y: 7.2175674}
       - {x: 13.566956, y: 9.89748}
       - {x: 13.56694, y: 13.246864}
+--- !u!50 &1149291193
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149291189}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &1702047965
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +402,7 @@ GameObject:
   - component: {fileID: 1702047967}
   - component: {fileID: 1702047966}
   - component: {fileID: 1702047971}
+  - component: {fileID: 1702047970}
   m_Layer: 0
   m_Name: FrogMove
   m_TagString: Frog
@@ -400,7 +423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  _movement: {x: 0, y: 0}
 --- !u!95 &1702047967
 Animator:
   serializedVersion: 3
@@ -479,12 +501,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702047965}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -21.4, y: -97.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1702047970
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702047965}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!61 &1702047971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -495,7 +538,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 11.5}

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FrogMove : MonoBehaviour
 {
     public float speed = 50f;
-    public Vector2 _movement;
+    private Vector2 _movement;
     private Animator _anmCtrl;
     private bool running;
     private int lookingHorizontal;
@@ -93,13 +93,9 @@ public class FrogMove : MonoBehaviour
         }
     }
 
-
-    void OnTriggerEnter2D(Collider2D col)
+    public void Respawn()
     {
-        if (col.gameObject.tag == "Enemy")
-        {
-            Debug.Log("aloja");
-        }
+        transform.position = new Vector3(0, 0, 0);
     }
 
 

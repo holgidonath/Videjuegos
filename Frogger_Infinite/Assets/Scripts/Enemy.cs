@@ -21,4 +21,12 @@ public class Enemy : MonoBehaviour
         float newposx = (curPos.x + (_movement.x * dt));
         transform.position = new Vector3(newposx, curPos.y, curPos.z);
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Frog")
+        {
+            col.SendMessage("Respawn");
+        }
+    }
 }
