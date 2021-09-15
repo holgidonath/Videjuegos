@@ -9,21 +9,72 @@ public class FrogMove : MonoBehaviour
     private Animator _anmCtrl;
     private bool running;
     private int lookingHorizontal;
+
+    private Vector3 destination, startPos;
+    float startTime, time;
+    private float move_tiles_y = Screen.height / 13;
+    private float move_tiles_x = Screen.width / 13;
    
     // Start is called before the first frame update
     void Start()
     {
         _anmCtrl = GetComponent<Animator>();
+        transform.position = new Vector3(0, -(Screen.height / 2), 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateInput();
-        UpdateMovement();
+        /*UpdateInput();*/
+        /*UpdateMovement();*/
+
+        if (running)
+        {
+            time = (Time.time - startTime) * speed;
+            transform.position = Vector3.Lerp(startPos, destination, time);
+            if(transform.position == destination)
+            {
+                running = false;
+                _anmCtrl.SetBool("run", false);
+            }
+        }
+
+        if ((Input.GetButton("Horizontal") || Input.GetButton("Vertical")) && !running)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                _anmCtrl.SetInteger("lookDir", 3);
+                destination = transform.position + new Vector3(0, move_tiles_y, 0);
+                lookingHorizontal = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                _anmCtrl.SetInteger("lookDir", 2);
+                destination = transform.position + new Vector3(0, -move_tiles_y, 0);
+                lookingHorizontal = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                _anmCtrl.SetInteger("lookDir", 1);
+                destination = transform.position + new Vector3(-move_tiles_x, 0, 0);
+                lookingHorizontal = 1;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                _anmCtrl.SetInteger("lookDir", 0);
+                destination = transform.position + new Vector3(move_tiles_x, 0, 0);
+                lookingHorizontal = 1;
+            }
+            _anmCtrl.SetBool("run", true);
+            startTime = Time.time;
+            startPos = transform.position;
+            running = true;
+        }
+
+        
     }
 
-    void UpdateInput()
+  /*  void UpdateInput()
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -31,8 +82,8 @@ public class FrogMove : MonoBehaviour
             _movement.x = speed;
             running = true;
             lookingHorizontal = 1;
-            _anmCtrl.SetBool ("run", true);
-        
+            _anmCtrl.SetBool("run", true);
+
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -40,17 +91,17 @@ public class FrogMove : MonoBehaviour
             _movement.x = -speed;
             running = true;
             lookingHorizontal = 1;
-            _anmCtrl.SetBool ("run", true);
-           
+            _anmCtrl.SetBool("run", true);
+
         }
-        else if  (Input.GetKey(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow))
         {
             _anmCtrl.SetInteger("lookDir", 3);
             _movement.y = speed;
             running = true;
             lookingHorizontal = 0;
-            _anmCtrl.SetBool ("run", true);
-            
+            _anmCtrl.SetBool("run", true);
+
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
@@ -58,23 +109,24 @@ public class FrogMove : MonoBehaviour
             _movement.y = -speed;
             running = true;
             lookingHorizontal = 0;
-            _anmCtrl.SetBool ("run", true);
-    
-            
+            _anmCtrl.SetBool("run", true);
+
+
         }
         else
         {
             _movement.x = 0f;
             _movement.y = 0f;
             running = false;
-            _anmCtrl.SetBool ("run", false);
+            _anmCtrl.SetBool("run", false);
         }
 
-       
+
+
 
     }
-
-    void UpdateMovement()
+*/
+ /*   void UpdateMovement()
     {
         var dt = Time.deltaTime;
         var curPos = transform.position;
@@ -91,11 +143,11 @@ public class FrogMove : MonoBehaviour
                 transform.position = new Vector3(curPos.x,newposy,curPos.z);
             }
         }
-    }
+    }*/
 
     public void Respawn()
     {
-        transform.position = new Vector3(0, 0, 0);
+        transform.position = new Vector3(0,0, 0);
     }
 
 
