@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarGenerator : MonoBehaviour
+public class Generator : MonoBehaviour
 {
     public Type type;
     public Position carPosition;
@@ -29,6 +29,10 @@ public class CarGenerator : MonoBehaviour
         if (type == Type.cars)
         {
             GameObject temporaryObject = Instantiate (car, transform.position, Quaternion.identity);
+        }
+        else if ((type == Type.logs))
+        {
+             GameObject temporaryObject = Instantiate (logs [Random.Range(0,logs.Length)], transform.position, Quaternion.identity);
         }
         
         Invoke ("Generate", Random.Range (minTime,maxTime));

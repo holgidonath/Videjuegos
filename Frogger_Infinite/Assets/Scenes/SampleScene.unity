@@ -365,7 +365,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2352907166960177650, guid: 39ae6541a78a6f940bc497715978e99a, type: 3}
       propertyPath: m_Name
-      value: CarGenerator
+      value: Generator
       objectReference: {fileID: 0}
     - target: {fileID: 8662451096345108038, guid: 39ae6541a78a6f940bc497715978e99a, type: 3}
       propertyPath: m_RootOrder
