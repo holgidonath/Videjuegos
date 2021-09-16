@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3354306836240933766}
   m_Layer: 0
-  m_Name: CarDestroyer
+  m_Name: Destroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

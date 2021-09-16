@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FrogMove : MonoBehaviour
 {
-    public float speed = 50f;
+    public float speed = 150f;
     private Vector2 _movement;
     private Animator _anmCtrl;
     private bool running;
@@ -14,12 +14,20 @@ public class FrogMove : MonoBehaviour
     float startTime, time;
     private float move_tiles_y = Screen.height / 13;
     private float move_tiles_x = Screen.width / 13;
+
+
+    public Transform movePoint;
+    public LayerMask whatStopsMovement;
+
+
    
     // Start is called before the first frame update
     void Start()
     {
         _anmCtrl = GetComponent<Animator>();
-        transform.position = new Vector3(0, -(Screen.height / 2), 0);
+        transform.position = new Vector3(10, -(Screen.height / 2), 0);
+        Debug.Log(Screen.height + " x " + Screen.width);
+        movePoint.parent = null;
     }
 
     // Update is called once per frame
@@ -28,7 +36,7 @@ public class FrogMove : MonoBehaviour
         /*UpdateInput();*/
         /*UpdateMovement();*/
 
-        if (running)
+        /*if (running)
         {
             time = (Time.time - startTime) * speed;
             transform.position = Vector3.Lerp(startPos, destination, time);
@@ -69,81 +77,141 @@ public class FrogMove : MonoBehaviour
             startTime = Time.time;
             startPos = transform.position;
             running = true;
-        }
+        }*/
 
-        
-    }
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, speed * Time.deltaTime);
 
-  /*  void UpdateInput()
-    {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            _anmCtrl.SetInteger("lookDir", 0);
-            _movement.x = speed;
-            running = true;
-            lookingHorizontal = 1;
-            _anmCtrl.SetBool("run", true);
-
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            _anmCtrl.SetInteger("lookDir", 1);
-            _movement.x = -speed;
-            running = true;
-            lookingHorizontal = 1;
-            _anmCtrl.SetBool("run", true);
-
-        }
-        else if (Input.GetKey(KeyCode.UpArrow))
-        {
-            _anmCtrl.SetInteger("lookDir", 3);
-            _movement.y = speed;
-            running = true;
-            lookingHorizontal = 0;
-            _anmCtrl.SetBool("run", true);
-
-        }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            _anmCtrl.SetInteger("lookDir", 2);
-            _movement.y = -speed;
-            running = true;
-            lookingHorizontal = 0;
-            _anmCtrl.SetBool("run", true);
-
-
-        }
-        else
-        {
-            _movement.x = 0f;
-            _movement.y = 0f;
-            running = false;
-            _anmCtrl.SetBool("run", false);
-        }
-
-
-
-
-    }
-*/
- /*   void UpdateMovement()
-    {
-        var dt = Time.deltaTime;
-        var curPos = transform.position;
         if (running)
         {
-            if(lookingHorizontal == 1)
+            if (transform.position == movePoint.position)
             {
-                float newposx = (curPos.x + (_movement.x * dt));
-                transform.position = new Vector3(newposx,curPos.y,curPos.z);
-            }
-            else if (lookingHorizontal == 0)
-            {
-                float newposy = (curPos.y + (_movement.y * dt));
-                transform.position = new Vector3(curPos.x,newposy,curPos.z);
+                running = false;
+                _anmCtrl.SetBool("run", false);
             }
         }
-    }*/
+
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.5f)
+        {
+            if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
+            {
+                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"),0f,0f), .2f, whatStopsMovement))
+                {
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*20, 0f, 0f);
+                    _anmCtrl.SetBool("run", true);
+                    running = true;
+                    lookingHorizontal = 1;
+                    if (Input.GetAxisRaw("Horizontal") == 1f)
+                    {
+                        _anmCtrl.SetInteger("lookDir", 0);
+                        
+                    } else
+                    {
+                        _anmCtrl.SetInteger("lookDir", 1);
+                    }
+
+                }
+                
+            }
+            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            {
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopsMovement))
+                {
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*20, 0f);
+                    _anmCtrl.SetBool("run", true);
+                    running = true;
+                    lookingHorizontal = 0;
+                    if (Input.GetAxisRaw("Vertical") == 1f)
+                    {
+                        _anmCtrl.SetInteger("lookDir", 3);
+                    } else
+                    {
+                        _anmCtrl.SetInteger("lookDir", 2);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+    }
+
+    /*  void UpdateInput()
+      {
+          if (Input.GetKey(KeyCode.RightArrow))
+          {
+              _anmCtrl.SetInteger("lookDir", 0);
+              _movement.x = speed;
+              running = true;
+              lookingHorizontal = 1;
+              _anmCtrl.SetBool("run", true);
+
+          }
+          else if (Input.GetKey(KeyCode.LeftArrow))
+          {
+              _anmCtrl.SetInteger("lookDir", 1);
+              _movement.x = -speed;
+              running = true;
+              lookingHorizontal = 1;
+              _anmCtrl.SetBool("run", true);
+
+          }
+          else if (Input.GetKey(KeyCode.UpArrow))
+          {
+              _anmCtrl.SetInteger("lookDir", 3);
+              _movement.y = speed;
+              running = true;
+              lookingHorizontal = 0;
+              _anmCtrl.SetBool("run", true);
+
+          }
+          else if (Input.GetKey(KeyCode.DownArrow))
+          {
+              _anmCtrl.SetInteger("lookDir", 2);
+              _movement.y = -speed;
+              running = true;
+              lookingHorizontal = 0;
+              _anmCtrl.SetBool("run", true);
+
+
+          }
+          else
+          {
+              _movement.x = 0f;
+              _movement.y = 0f;
+              running = false;
+              _anmCtrl.SetBool("run", false);
+          }
+
+
+
+
+      }
+  */
+    /*   void UpdateMovement()
+       {
+           var dt = Time.deltaTime;
+           var curPos = transform.position;
+           if (running)
+           {
+               if(lookingHorizontal == 1)
+               {
+                   float newposx = (curPos.x + (_movement.x * dt));
+                   transform.position = new Vector3(newposx,curPos.y,curPos.z);
+               }
+               else if (lookingHorizontal == 0)
+               {
+                   float newposy = (curPos.y + (_movement.y * dt));
+                   transform.position = new Vector3(curPos.x,newposy,curPos.z);
+               }
+           }
+       }*/
 
     public void Respawn()
     {
