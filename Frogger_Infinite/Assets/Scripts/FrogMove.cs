@@ -18,12 +18,14 @@ public class FrogMove : MonoBehaviour
 
     public Transform movePoint;
     public LayerMask whatStopsMovement;
+    public Resolution resolution;
 
 
    
     // Start is called before the first frame update
     void Start()
     {
+        resolution = Screen.currentResolution;
         _anmCtrl = GetComponent<Animator>();
         transform.position = new Vector3(10, -(Screen.height / 2), 0);
         Debug.Log(Screen.height + " x " + Screen.width);
@@ -96,7 +98,7 @@ public class FrogMove : MonoBehaviour
             {
                 if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"),0f,0f), .2f, whatStopsMovement))
                 {
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*20, 0f, 0f);
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*20f, 0f, 0f);
                     _anmCtrl.SetBool("run", true);
                     running = true;
                     lookingHorizontal = 1;
@@ -116,7 +118,7 @@ public class FrogMove : MonoBehaviour
             {
                 if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopsMovement))
                 {
-                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*20, 0f);
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*(Screen.height/13f), 0f);
                     _anmCtrl.SetBool("run", true);
                     running = true;
                     lookingHorizontal = 0;
