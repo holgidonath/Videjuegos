@@ -118,7 +118,7 @@ public class FrogMove : MonoBehaviour
             {
                 if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopsMovement))
                 {
-                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*(Screen.height/13f), 0f);
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*20f, 0f);
                     _anmCtrl.SetBool("run", true);
                     running = true;
                     lookingHorizontal = 0;
