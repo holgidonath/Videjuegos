@@ -102,8 +102,8 @@ public class FrogMove : MonoBehaviour
             {
                 
                     var lastMovePointPositionX = movePoint.position;
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*20f, 0f, 0f);
-                    if(Mathf.Abs(movePoint.position.x) < Screen.width / 2) { 
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*19f, 0f, 0f);
+                    if(Mathf.Abs(movePoint.position.x) <= Screen.width / 2) { 
                         _anmCtrl.SetBool("run", true);
                         running = true;
                         lookingHorizontal = 1;
