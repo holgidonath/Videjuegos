@@ -27,9 +27,10 @@ public class FrogMove : MonoBehaviour
     {
         resolution = Screen.currentResolution;
         _anmCtrl = GetComponent<Animator>();
-        transform.position = new Vector3(10, -(Screen.height / 2), 0);
-        Debug.Log(Screen.height + " x " + Screen.width);
+        transform.position = new Vector3(0, -(Screen.height / 2), 0);
+        Debug.Log(Screen.width + " x " + Screen.height);
         movePoint.parent = null;
+
     }
 
     // Update is called once per frame
@@ -92,7 +93,7 @@ public class FrogMove : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, movePoint.position) <= 0.5f)
+        if (Vector3.Distance(transform.position, movePoint.position) <= 0.5f && !running)
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
