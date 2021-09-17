@@ -20,6 +20,8 @@ public class FrogMove : MonoBehaviour
     public LayerMask whatStopsMovement;
     public Resolution resolution;
 
+    private Camera cam;
+
 
    
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class FrogMove : MonoBehaviour
         transform.position = new Vector3(0, -(Screen.height / 2), 0);
         Debug.Log(Screen.width + " x " + Screen.height);
         movePoint.parent = null;
+        cam = Camera.main;
 
     }
 
@@ -97,40 +100,55 @@ public class FrogMove : MonoBehaviour
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
-                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"),0f,0f), .2f, whatStopsMovement))
-                {
+                
+                    var lastMovePointPositionX = movePoint.position;
                     movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*20f, 0f, 0f);
-                    _anmCtrl.SetBool("run", true);
-                    running = true;
-                    lookingHorizontal = 1;
-                    if (Input.GetAxisRaw("Horizontal") == 1f)
-                    {
-                        _anmCtrl.SetInteger("lookDir", 0);
+                    if(Mathf.Abs(movePoint.position.x) < Screen.width / 2) { 
+                        _anmCtrl.SetBool("run", true);
+                        running = true;
+                        lookingHorizontal = 1;
+                        if (Input.GetAxisRaw("Horizontal") == 1f)
+                        {
+                            _anmCtrl.SetInteger("lookDir", 0);
                         
-                    } else
+                        } else
+                        {
+                            _anmCtrl.SetInteger("lookDir", 1);
+                        }
+                    }
+                    else
                     {
-                        _anmCtrl.SetInteger("lookDir", 1);
+                        movePoint.position = lastMovePointPositionX;
                     }
 
-                }
+                
                 
             }
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopsMovement))
-                {
+               
+                    var lastMovePointPositionY = movePoint.position;
                     movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*20f, 0f);
-                    _anmCtrl.SetBool("run", true);
-                    running = true;
-                    lookingHorizontal = 0;
-                    if (Input.GetAxisRaw("Vertical") == 1f)
+                    
+                    if (movePoint.position.y >= (cam.transform.position.y - Screen.height/2))
                     {
-                        _anmCtrl.SetInteger("lookDir", 3);
-                    } else
-                    {
-                        _anmCtrl.SetInteger("lookDir", 2);
+                        _anmCtrl.SetBool("run", true);
+                        running = true;
+                        lookingHorizontal = 0;
+                        if (Input.GetAxisRaw("Vertical") == 1f)
+                        {
+                            _anmCtrl.SetInteger("lookDir", 3);
+                        }
+                        else
+                        {
+                            _anmCtrl.SetInteger("lookDir", 2);
+                        }
                     }
-                }
+                    else
+                    {
+                        movePoint.position = lastMovePointPositionY;
+                    }
+                
             }
         }
 
