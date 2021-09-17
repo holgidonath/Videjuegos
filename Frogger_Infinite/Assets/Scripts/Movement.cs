@@ -24,10 +24,14 @@ public class Movement : MonoBehaviour
         {
             col.SendMessage("Respawn");
         }
+        if (col.tag == "Destructor")
+        {
+            Destruir();
+        }
     }
 
     void Destruir()
     {
-    
+        Destroy (gameObject);
     }
 }

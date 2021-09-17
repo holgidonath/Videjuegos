@@ -5,7 +5,6 @@ using UnityEngine;
 public class Generator : MonoBehaviour
 {
     public Type type;
-    public Position carPosition;
     public float minTime, maxTime;
     public GameObject car;
     public GameObject [] logs;
@@ -18,11 +17,6 @@ public class Generator : MonoBehaviour
         logs
     }
 
-    public enum Position
-    {
-        left,
-        right
-    }
 
     void Generate()
     {
