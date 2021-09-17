@@ -124,7 +124,7 @@ public class FrogMove : MonoBehaviour
                 
                 
             }
-            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
             {
                
                     var lastMovePointPositionY = movePoint.position;
