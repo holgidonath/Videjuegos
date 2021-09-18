@@ -22,14 +22,17 @@ public class FrogMove : MonoBehaviour
 
     private Camera cam;
 
+    private float tilesx = 19f;
+    private float tilesy = 20f;
 
-   
+
+
     // Start is called before the first frame update
     void Start()
     {
         resolution = Screen.currentResolution;
         _anmCtrl = GetComponent<Animator>();
-        transform.position = new Vector3(0, -(Screen.height / 2), 0);
+        transform.position = new Vector3(0, -(Screen.height / 2) + 2f, 0);
         Debug.Log(Screen.width + " x " + Screen.height);
         movePoint.parent = null;
         cam = Camera.main;
@@ -102,7 +105,7 @@ public class FrogMove : MonoBehaviour
             {
                 
                     var lastMovePointPositionX = movePoint.position;
-                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*19f, 0f, 0f);
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*tilesx, 0f, 0f);
                     if(Mathf.Abs(movePoint.position.x) <= Screen.width / 2) { 
                         _anmCtrl.SetBool("run", true);
                         running = true;
@@ -128,7 +131,7 @@ public class FrogMove : MonoBehaviour
             {
                
                     var lastMovePointPositionY = movePoint.position;
-                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*20f, 0f);
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*tilesy, 0f);
                     
                     if (movePoint.position.y >= (cam.transform.position.y - Screen.height/2))
                     {
@@ -167,9 +170,16 @@ public class FrogMove : MonoBehaviour
     {
         if(col.gameObject.tag == "Platform")
         {
-            Debug.Log("hola");
-            movePoint.parent = col.transform;
-            transform.parent = col.transform;
+            if (Mathf.Abs(movePoint.position.x) <= ((Screen.width / 2)-8)) // el 8 es para corregir el offset del sprite
+            {
+                Debug.Log("hola");
+                movePoint.parent = col.transform;
+                transform.parent = col.transform;
+            }else
+            {
+                transform.parent = null;
+                movePoint.parent = null;
+            }
 
         }
     }
