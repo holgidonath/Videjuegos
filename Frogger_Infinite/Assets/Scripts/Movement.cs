@@ -20,10 +20,6 @@ public class Movement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Frog")
-        {
-            col.SendMessage("Respawn");
-        }
         if (col.tag == "Destructor")
         {
             Destruir();

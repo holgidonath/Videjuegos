@@ -1361,6 +1361,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yellow Car
       objectReference: {fileID: 0}
+    - target: {fileID: 6652716460494563476, guid: 16461aac037aa444682f350b78ace8f7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16461aac037aa444682f350b78ace8f7, type: 3}
 --- !u!1001 &4454374085454519398
@@ -1457,6 +1461,10 @@ PrefabInstance:
     - target: {fileID: 284558058654118201, guid: 85c0073167b21064e857fc2784eb1694, type: 3}
       propertyPath: m_Name
       value: Pink Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 284558058654118201, guid: 85c0073167b21064e857fc2784eb1694, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 494260343333934431, guid: 85c0073167b21064e857fc2784eb1694, type: 3}
       propertyPath: m_RootOrder
@@ -1664,6 +1672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Truck
       objectReference: {fileID: 0}
+    - target: {fileID: 6718347890222557167, guid: a00c048e44b0174469b8b50ffa1c0487, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a00c048e44b0174469b8b50ffa1c0487, type: 3}
 --- !u!1001 &7896379074152795426
@@ -1803,6 +1815,10 @@ PrefabInstance:
     - target: {fileID: 3489409871786485653, guid: 0cc2bdf6464c2d74393ba0978ca11b19, type: 3}
       propertyPath: m_Name
       value: Mower
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489409871786485653, guid: 0cc2bdf6464c2d74393ba0978ca11b19, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cc2bdf6464c2d74393ba0978ca11b19, type: 3}
