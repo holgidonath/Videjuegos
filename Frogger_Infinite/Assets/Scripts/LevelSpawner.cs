@@ -10,6 +10,7 @@ public class LevelSpawner : MonoBehaviour
 
     void Start()
     {
+        nextSpawnPoint = new Vector3(0, -100, 0);
         SpawnLevel();
         SpawnLevel();
         SpawnLevel();

@@ -5,9 +5,11 @@ using UnityEngine;
 public class Generator : MonoBehaviour
 {
     public Type type;
+    public CarType carType;
     public float minTime, maxTime;
-    public GameObject car;
+    public GameObject [] cars;
     public GameObject [] logs;
+
 
     bool active;
 
@@ -17,16 +19,42 @@ public class Generator : MonoBehaviour
         logs
     }
 
+    public enum CarType
+    {
+        mower,
+        pinkCar,
+        truck,
+        whiteCar,
+        yellowCar
+    }
+
 
     void Generate()
     {
         if (type == Type.cars)
         {
-            GameObject temporaryObject = Instantiate (car, transform.position, Quaternion.identity);
+            GameObject temporaryObject = Instantiate (cars[(int)carType], transform.position, Quaternion.identity);
+            var carScript = temporaryObject.GetComponent<Movement>();
+            if(transform.position.x > 0)
+            {
+                carScript.speed = -50f;
+            } else
+            {
+                carScript.speed = 50f;
+            }
         }
         else if ((type == Type.logs))
         {
-             GameObject temporaryObject = Instantiate (logs [Random.Range(0,logs.Length)], transform.position, Quaternion.identity);
+            GameObject temporaryObject = Instantiate (logs [Random.Range(0,logs.Length)], transform.position, Quaternion.identity);
+            var logScript = temporaryObject.GetComponent<Movement>();
+            if (transform.position.x > 0)
+            {
+                logScript.speed = -50f;
+            }
+            else
+            {
+                logScript.speed = 50f;
+            }
         }
         
         Invoke ("Generate", Random.Range (minTime,maxTime));
@@ -34,6 +62,11 @@ public class Generator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        type = (Type)transform.parent.GetComponent<LevelTile>().type;
+        if(type == Type.cars)
+        {
+            carType = (CarType)Random.Range(0, 5);
+        }
         Generate();
     }
 

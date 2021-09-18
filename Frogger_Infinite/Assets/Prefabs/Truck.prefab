@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9113134911398715661}
   - component: {fileID: 3954679513245317569}
   - component: {fileID: 1534678473605753136}
+  - component: {fileID: 895903925460737232}
   m_Layer: 0
   m_Name: Truck
   m_TagString: Enemy
@@ -131,3 +132,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &895903925460737232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718347890222557167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 950c70e23e04fb84cab2a10ddee08018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0

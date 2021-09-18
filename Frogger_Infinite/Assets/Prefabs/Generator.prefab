@@ -44,8 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  carPosition: 0
+  carType: 0
   minTime: 3
   maxTime: 7
-  car: {fileID: 0}
-  logs: []
+  cars:
+  - {fileID: 3489409871786485653, guid: 0cc2bdf6464c2d74393ba0978ca11b19, type: 3}
+  - {fileID: 284558058654118201, guid: 85c0073167b21064e857fc2784eb1694, type: 3}
+  - {fileID: 6718347890222557167, guid: a00c048e44b0174469b8b50ffa1c0487, type: 3}
+  - {fileID: 6483248350139758790, guid: c1037e0d5e42fbe4ab3d2bb50d785f6b, type: 3}
+  - {fileID: 6652716460494563476, guid: 16461aac037aa444682f350b78ace8f7, type: 3}
+  logs:
+  - {fileID: 1814521750618299658, guid: 930172665f99a2e46bf03d0534882076, type: 3}
+  - {fileID: 1891040649344807283, guid: 4dbd807b08905bc47944a729c5eebce1, type: 3}
+  - {fileID: 4342377271032470913, guid: e74d14c6494bb294d8225f65771d47fe, type: 3}

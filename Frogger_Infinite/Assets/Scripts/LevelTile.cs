@@ -6,8 +6,17 @@ public class LevelTile : MonoBehaviour
 {
     // Start is called before the first frame update
     LevelSpawner levelSpawner;
+    public Type type;
+
+    public enum Type
+    {
+        cars,
+        logs
+    }
+
     void Start()
     {
+        type = (Type)Random.Range(0, 2);
         levelSpawner = GameObject.FindObjectOfType<LevelSpawner>();
     }
 
