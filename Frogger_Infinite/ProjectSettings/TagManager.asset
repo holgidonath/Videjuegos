@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Destructor
   - Platform
+  - Level
   layers:
   - Default
   - TransparentFX
