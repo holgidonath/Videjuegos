@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FrogMove : MonoBehaviour
 {
@@ -162,7 +163,7 @@ public class FrogMove : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            transform.position = new Vector3(0, 0, 0);
+            Respawn();
         }
     }
 
@@ -266,7 +267,14 @@ public class FrogMove : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = new Vector3(0,0, 0);
+        /*transform.position = new Vector3(0, -100, 0);
+        movePoint.position = new Vector3(0, -100, 0);
+        GameObject[] prefabs = GameObject.FindGameObjectsWithTag("Level");
+        for(GameObject prefab in prefabs)
+        {
+            Destroy(prefab);
+        }*/
+        SceneManager.LoadScene("SampleScene");
     }
 
 

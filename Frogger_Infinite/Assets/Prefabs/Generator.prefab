@@ -45,8 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   carType: 0
-  minTime: 3
-  maxTime: 7
+  minTime: 1.5
+  maxTime: 3
   cars:
   - {fileID: 3489409871786485653, guid: 0cc2bdf6464c2d74393ba0978ca11b19, type: 3}
   - {fileID: 284558058654118201, guid: 85c0073167b21064e857fc2784eb1694, type: 3}
