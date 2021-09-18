@@ -799,7 +799,7 @@ SpriteRenderer:
   m_SortingLayerID: -280344917
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1613429960535198608, guid: 8342900f3af61574d8140659484968de, type: 3}
+  m_Sprite: {fileID: -5160973788410497094, guid: 8342900f3af61574d8140659484968de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -818,7 +818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702047965}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -100, z: 0}
+  m_LocalPosition: {x: -0.7, y: -99.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 597434771}
@@ -842,7 +842,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 15.862068, y: 11.724137}
+    oldSize: {x: 11.724137, y: 15.862068}
     newSize: {x: 0.17, y: 0.23}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -869,7 +869,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!1 &1952034302 stripped
@@ -1199,8 +1199,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medium log
       objectReference: {fileID: 0}
+    - target: {fileID: 1891040649344807283, guid: 4dbd807b08905bc47944a729c5eebce1, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     - target: {fileID: 4653820314577323324, guid: 4dbd807b08905bc47944a729c5eebce1, type: 3}
       propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653820314577323324, guid: 4dbd807b08905bc47944a729c5eebce1, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1234,9 +1242,17 @@ PrefabInstance:
       propertyPath: m_BodyType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4075157457422566346, guid: e74d14c6494bb294d8225f65771d47fe, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4342377271032470913, guid: e74d14c6494bb294d8225f65771d47fe, type: 3}
       propertyPath: m_Name
       value: Small Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 4342377271032470913, guid: e74d14c6494bb294d8225f65771d47fe, type: 3}
+      propertyPath: m_TagString
+      value: Platform
       objectReference: {fileID: 0}
     - target: {fileID: 4342377271032470919, guid: e74d14c6494bb294d8225f65771d47fe, type: 3}
       propertyPath: m_RootOrder
@@ -1388,11 +1404,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4454374083794824327, guid: 01d690291fba3dc4d82224aa14eda6d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4454374083794824327, guid: 01d690291fba3dc4d82224aa14eda6d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -100
+      value: -99.3
       objectReference: {fileID: 0}
     - target: {fileID: 4454374083794824327, guid: 01d690291fba3dc4d82224aa14eda6d0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1733,8 +1749,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Log
       objectReference: {fileID: 0}
+    - target: {fileID: 1814521750618299658, guid: 930172665f99a2e46bf03d0534882076, type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     - target: {fileID: 6674463135088170765, guid: 930172665f99a2e46bf03d0534882076, type: 3}
       propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6674463135088170765, guid: 930172665f99a2e46bf03d0534882076, type: 3}
+      propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

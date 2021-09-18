@@ -163,6 +163,26 @@ public class FrogMove : MonoBehaviour
         }
     }
 
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "Platform")
+        {
+            Debug.Log("hola");
+            movePoint.parent = col.transform;
+            transform.parent = col.transform;
+
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Platform")
+        {
+            transform.parent = null;
+            movePoint.parent = null;
+        }
+    }
+
     /*  void UpdateInput()
       {
           if (Input.GetKey(KeyCode.RightArrow))

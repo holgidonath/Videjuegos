@@ -7,6 +7,7 @@ TagManager:
   - Frog
   - Enemy
   - Destructor
+  - Platform
   layers:
   - Default
   - TransparentFX
