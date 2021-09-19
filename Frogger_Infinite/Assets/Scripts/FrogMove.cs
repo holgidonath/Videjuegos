@@ -236,6 +236,7 @@ public class FrogMove : MonoBehaviour
         if (col.gameObject.tag == "Checkpoint")
         {
            bonus.enabled = false;
+           Destroy(col);
         }
 
     }
