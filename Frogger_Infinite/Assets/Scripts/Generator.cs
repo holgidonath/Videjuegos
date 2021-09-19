@@ -37,9 +37,17 @@ public class Generator : MonoBehaviour
             var carScript = temporaryObject.GetComponent<Movement>();
             if(transform.position.x > 0)
             {
+                if(carType == CarType.mower || carType == CarType.whiteCar)
+                {
+                    temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
+                }
                 carScript.speed = -50f;
             } else
             {
+                if (carType == CarType.pinkCar || carType == CarType.truck || carType == CarType.yellowCar)
+                {
+                    temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
+                }
                 carScript.speed = 50f;
             }
         }
