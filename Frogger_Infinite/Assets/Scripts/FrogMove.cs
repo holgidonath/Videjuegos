@@ -10,7 +10,7 @@ public class FrogMove : MonoBehaviour
     public Text counterText1;
     public Text counterText;
     public Text bonus;
-    public float counter = 0;
+    public float counter = -1;
     public GameObject lossMenu;
     public float speed = 150f;
     private Vector2 _movement;
@@ -331,7 +331,7 @@ public class FrogMove : MonoBehaviour
     {
         if(counter_check%5 == 0 && counter_check >= 5)
         {
-            counter += counter/2;
+            counter += 2*counter/3;
             bonus.enabled = true;
         }
         else
@@ -339,8 +339,8 @@ public class FrogMove : MonoBehaviour
             counter += 1;
         }
         counter_check += 1;
-        counterText.text = Mathf.Floor(counter).ToString();
-        counterText1.text = Mathf.Floor(counter).ToString();
+        counterText.text = Mathf.Round(counter).ToString();
+        counterText1.text = Mathf.Round(counter).ToString();
     }
     
 
