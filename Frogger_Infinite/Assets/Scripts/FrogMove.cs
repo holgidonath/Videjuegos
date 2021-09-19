@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FrogMove : MonoBehaviour
 {
+    public Text counterText;
+    public float counter = 0;
     public GameObject lossMenu;
     public float speed = 150f;
     private Vector2 _movement;
@@ -151,6 +154,8 @@ public class FrogMove : MonoBehaviour
                         if (Input.GetAxisRaw("Vertical") == 1f)
                         {
                             _anmCtrl.SetInteger("lookDir", 3);
+                            counter +=1;
+                            counterText.text = counter.ToString();
                         }
                         else
                         {
