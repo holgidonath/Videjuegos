@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class FrogMove : MonoBehaviour
 {
+    private float counter_check = 0;
     public Text counterText1;
     public Text counterText;
-    public float counter = 0;
+    public Text bonus;
+    public float counter = -1;
     public GameObject lossMenu;
     public float speed = 150f;
     private Vector2 _movement;
@@ -175,9 +177,7 @@ public class FrogMove : MonoBehaviour
                         if (Input.GetAxisRaw("Vertical") == 1f)
                         {
                             _anmCtrl.SetInteger("lookDir", 3);
-                            counter +=1;
-                            counterText.text = counter.ToString();
-                            counterText1.text = counter.ToString();
+                        
                         }
                         else
                         {
@@ -209,6 +209,10 @@ public class FrogMove : MonoBehaviour
         else if (col.gameObject.tag == "Platform" || col.gameObject.tag == "CheckPoint")
         {
             logsTouched++;
+            if (col.gameObject.tag == "Checkpoint")
+            {
+                AddPoint();
+            }
         }
 
         
@@ -262,6 +266,12 @@ public class FrogMove : MonoBehaviour
                 Destroy(temp);
             }
         }
+        if (col.gameObject.tag == "Checkpoint")
+        {
+           bonus.enabled = false;
+           Destroy(col);
+        }
+
     }
 
     /*  void UpdateInput()
@@ -352,6 +362,23 @@ public class FrogMove : MonoBehaviour
         }
 
     }
+
+    public void AddPoint()
+    {
+        if(counter_check%5 == 0 && counter_check >= 5)
+        {
+            counter += 2*counter/3;
+            bonus.enabled = true;
+        }
+        else
+        {
+            counter += 1;
+        }
+        counter_check += 1;
+        counterText.text = Mathf.Round(counter).ToString();
+        counterText1.text = Mathf.Round(counter).ToString();
+    }
+    
 
 
 }
