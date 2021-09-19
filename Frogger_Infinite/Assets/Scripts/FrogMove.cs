@@ -26,6 +26,8 @@ public class FrogMove : MonoBehaviour
     private float tilesx = 19f;
     private float tilesy = 20f;
 
+    private bool xAxisInUse = false;
+    private bool yAxisInUse = false;
 
 
     // Start is called before the first frame update
@@ -104,7 +106,8 @@ public class FrogMove : MonoBehaviour
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
-                
+                if (xAxisInUse == false && yAxisInUse == false) 
+                { 
                     var lastMovePointPositionX = movePoint.position;
                     movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*tilesx, 0f, 0f);
                     if(Mathf.Abs(movePoint.position.x) <= Screen.width / 2) { 
@@ -124,13 +127,18 @@ public class FrogMove : MonoBehaviour
                     {
                         movePoint.position = lastMovePointPositionX;
                     }
+                    xAxisInUse = true;
+                }
 
-                
-                
-            }
-            else if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            } 
+            if(Input.GetAxisRaw("Horizontal") == 0)
             {
-               
+                xAxisInUse = false;
+            }
+            if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f)
+            {
+                if (yAxisInUse == false && xAxisInUse == false) 
+                { 
                     var lastMovePointPositionY = movePoint.position;
                     movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical")*tilesy, 0f);
                     
@@ -152,7 +160,12 @@ public class FrogMove : MonoBehaviour
                     {
                         movePoint.position = lastMovePointPositionY;
                     }
-                
+                    yAxisInUse = true;
+                }
+            }
+            if (Input.GetAxisRaw("Vertical") == 0)
+            {
+                yAxisInUse = false;
             }
         }
 
