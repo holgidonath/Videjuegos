@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class FrogMove : MonoBehaviour
 {
+    public GameObject lossMenu;
     public float speed = 150f;
     private Vector2 _movement;
     private Animator _anmCtrl;
@@ -287,8 +288,9 @@ public class FrogMove : MonoBehaviour
         {
             Destroy(prefab);
         }*/
-        SceneManager.LoadScene("LossScreen");
-
+        lossMenu.SetActive(true);
+        
+        
     }
 
 

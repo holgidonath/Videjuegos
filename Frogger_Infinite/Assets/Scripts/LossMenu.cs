@@ -14,4 +14,6 @@ public class LossMenu : MonoBehaviour
   {
     SceneManager.LoadScene("Menu");
   }
+
+  
 }
