@@ -30,6 +30,8 @@ public class FrogMove : MonoBehaviour
     private bool xAxisInUse = false;
     private bool yAxisInUse = false;
 
+    private List<GameObject> levelsToDestroy;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class FrogMove : MonoBehaviour
         Debug.Log(Screen.width + " x " + Screen.height);
         movePoint.parent = null;
         cam = Camera.main;
+        levelsToDestroy = new List<GameObject>();
 
     }
 
@@ -187,7 +190,6 @@ public class FrogMove : MonoBehaviour
         {
             if (Mathf.Abs(movePoint.position.x) <= ((Screen.width / 2)-8)) // el 8 es para corregir el offset del sprite
             {
-                Debug.Log("hola");
                 movePoint.parent = col.transform;
                 transform.parent = col.transform;
             }else
@@ -205,6 +207,20 @@ public class FrogMove : MonoBehaviour
         {
             transform.parent = null;
             movePoint.parent = null;
+        } else if (col.gameObject.tag == "Level")
+        {
+            Debug.Log("level added");
+            if (!levelsToDestroy.Contains(col.gameObject))
+            {
+                levelsToDestroy.Add(col.gameObject);
+            }
+            
+            if(levelsToDestroy.Count >= 5)
+            {
+                GameObject temp = levelsToDestroy[0];
+                levelsToDestroy.RemoveAt(0);
+                Destroy(temp);
+            }
         }
     }
 
@@ -288,6 +304,7 @@ public class FrogMove : MonoBehaviour
         {
             Destroy(prefab);
         }*/
+        Destroy(transform.gameObject);
         lossMenu.SetActive(true);
         
         

@@ -25,7 +25,7 @@ public class LevelTile : MonoBehaviour
         if(col.gameObject.tag == "Frog")
         {
             levelSpawner.SpawnLevel();
-            Destroy(gameObject, 2);
+            /*Destroy(gameObject, 2);*/
         }
     }
     // Update is called once per frame
