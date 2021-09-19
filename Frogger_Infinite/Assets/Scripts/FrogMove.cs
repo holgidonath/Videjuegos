@@ -287,7 +287,8 @@ public class FrogMove : MonoBehaviour
         {
             Destroy(prefab);
         }*/
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("LossScreen");
+
     }
 
 
