@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class FrogMove : MonoBehaviour
 {
+    public Text counterText1;
     public Text counterText;
     public float counter = 0;
     public GameObject lossMenu;
@@ -156,6 +157,7 @@ public class FrogMove : MonoBehaviour
                             _anmCtrl.SetInteger("lookDir", 3);
                             counter +=1;
                             counterText.text = counter.ToString();
+                            counterText1.text = counter.ToString();
                         }
                         else
                         {
