@@ -41,6 +41,12 @@ public class Generator : MonoBehaviour
                 if (carType == CarType.mower || carType == CarType.whiteCar)
                 {
                     temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
+                    if (carType == CarType.whiteCar)
+                    {
+                        minTime = 0.5f;
+                        maxTime = 2f;
+                        carScript.speed = -150f;
+                    }
                 }
                 
             } else
@@ -50,13 +56,21 @@ public class Generator : MonoBehaviour
                 {
                     temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
                 }
-                
+                if (carType == CarType.whiteCar)
+                {
+                    minTime = 0.5f;
+                    maxTime = 2f;
+                    carScript.speed = 150f;
+                }
+
             }
         }
         else if ((type == Type.logs))
         {
             GameObject temporaryObject = Instantiate (logs [Random.Range(0,logs.Length)], transform.position, Quaternion.identity);
             var logScript = temporaryObject.GetComponent<Movement>();
+            maxTime = 5f;
+            minTime = 3f;
             if (transform.position.x > 0)
             {
                 logScript.speed = -50f;
@@ -76,6 +90,11 @@ public class Generator : MonoBehaviour
         if(type == Type.cars)
         {
             carType = (CarType)Random.Range(0, 5);
+            if(carType == CarType.whiteCar)
+            {
+                minTime = 0.3f;
+                maxTime = 1f;
+            }
         }
         Generate();
     }

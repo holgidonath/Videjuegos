@@ -34,7 +34,11 @@ public class FrogMove : MonoBehaviour
     private bool xAxisInUse = false;
     private bool yAxisInUse = false;
 
+    private bool dead = false;
+
     private List<GameObject> levelsToDestroy;
+
+    private int logsTouched = 0;
 
 
     // Start is called before the first frame update
@@ -47,6 +51,7 @@ public class FrogMove : MonoBehaviour
         movePoint.parent = null;
         cam = Camera.main;
         levelsToDestroy = new List<GameObject>();
+        lookingHorizontal = 1;
 
     }
 
@@ -101,7 +106,7 @@ public class FrogMove : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, speed * Time.deltaTime);
 
-        if (running)
+        if (running && !dead)
         {
             if (transform.position == movePoint.position)
             {
@@ -110,7 +115,7 @@ public class FrogMove : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, movePoint.position) <= 0.5f && !running)
+        if ((Vector3.Distance(transform.position, movePoint.position) <= 0.5f && !running) && !dead)
         {
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f)
             {
@@ -118,7 +123,14 @@ public class FrogMove : MonoBehaviour
                 { 
                     var lastMovePointPositionX = movePoint.position;
                     movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal")*tilesx, 0f, 0f);
-                    if(Mathf.Abs(movePoint.position.x) <= Screen.width / 2) { 
+                    
+                    if (Mathf.Abs(movePoint.position.x) <= Screen.width / 2) { 
+                        if(lookingHorizontal == 0)
+                        {
+                            var collider = GetComponent<BoxCollider2D>();
+                            collider.size = new Vector2(collider.size.y, collider.size.x);
+                            collider.offset = new Vector2(collider.offset.x, 7.8f);
+                        }
                         _anmCtrl.SetBool("run", true);
                         running = true;
                         lookingHorizontal = 1;
@@ -152,6 +164,11 @@ public class FrogMove : MonoBehaviour
                     
                     if (movePoint.position.y >= (cam.transform.position.y - Screen.height/2))
                     {
+                        if(lookingHorizontal == 1) { 
+                            var collider = GetComponent<BoxCollider2D>();
+                            collider.size = new Vector2(collider.size.y, collider.size.x);
+                            collider.offset = new Vector2(collider.offset.x, 6f);
+                        }
                         _anmCtrl.SetBool("run", true);
                         running = true;
                         lookingHorizontal = 0;
@@ -185,15 +202,21 @@ public class FrogMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Enemy")
+        if (col.gameObject.tag == "Enemy" && !dead)
         {
             Respawn();
         }
+        else if (col.gameObject.tag == "Platform" || col.gameObject.tag == "CheckPoint")
+        {
+            logsTouched++;
+        }
+
+        
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Platform")
+        if(col.gameObject.tag == "Platform" && !dead)
         {
             if (Mathf.Abs(movePoint.position.x) <= ((Screen.width / 2)-8)) // el 8 es para corregir el offset del sprite
             {
@@ -206,15 +229,25 @@ public class FrogMove : MonoBehaviour
             }
 
         }
+        else if (logsTouched == 0 && col.gameObject.tag == "Water" && !dead)
+        {
+            Respawn();
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Platform")
+        if (col.gameObject.tag == "Platform" && !dead)
         {
             transform.parent = null;
             movePoint.parent = null;
-        } else if (col.gameObject.tag == "Level")
+            logsTouched--;
+        } 
+        else if (col.gameObject.tag == "CheckPoint")
+        {
+            logsTouched--;
+        }
+        else if (col.gameObject.tag == "Level" && !dead)
         {
             Debug.Log("level added");
             if (!levelsToDestroy.Contains(col.gameObject))
@@ -311,10 +344,13 @@ public class FrogMove : MonoBehaviour
         {
             Destroy(prefab);
         }*/
-        Destroy(transform.gameObject);
-        lossMenu.SetActive(true);
-        
-        
+        if (!dead) 
+        { 
+            dead = true;
+            GetComponent<SpriteRenderer>().enabled = false;
+            lossMenu.SetActive(true);
+        }
+
     }
 
 

@@ -18,6 +18,10 @@ public class LevelTile : MonoBehaviour
     {
         type = (Type)Random.Range(0, 2);
         levelSpawner = GameObject.FindObjectOfType<LevelSpawner>();
+        if(type == Type.cars)
+        {
+            Destroy(transform.Find("Water").gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)

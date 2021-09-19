@@ -9,6 +9,8 @@ TagManager:
   - Destructor
   - Platform
   - Level
+  - CheckPoint
+  - Water
   layers:
   - Default
   - TransparentFX
