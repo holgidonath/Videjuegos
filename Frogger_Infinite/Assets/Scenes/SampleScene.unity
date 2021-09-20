@@ -623,6 +623,7 @@ MonoBehaviour:
   target: {fileID: 1702047969}
   offset: {x: 0, y: 0, z: 0}
   smoothFactor: 5
+  cam: {fileID: 519420031}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

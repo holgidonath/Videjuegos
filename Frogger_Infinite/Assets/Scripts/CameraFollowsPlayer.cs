@@ -9,12 +9,16 @@ public class CameraFollowsPlayer : MonoBehaviour
     [Range(1, 10)]
     public float smoothFactor;
     public Camera cam;
+    private int startingWidth;
+    private int statingHeight;
 
     void Start()
     {
+        startingWidth = Screen.width;
+        statingHeight = Screen.height;
         if(Screen.width > 400)
         {
-            transform.position = new Vector3(transform.position.x, 140, transform.position.z);
+            cam.transform.position = new Vector3(transform.position.x, 140, transform.position.z);
             cam.orthographicSize = 240f;
         }
         else
@@ -26,14 +30,42 @@ public class CameraFollowsPlayer : MonoBehaviour
     void Update()
     {
         Follow();
-        if (Screen.width > 400)
+        if(Screen.width != startingWidth)
         {
-            cam.orthographicSize = 240f;
+            if (Screen.width > 400)
+            {
+                if(startingWidth < 400)
+                {
+                    
+                    cam.transform.position = new Vector3(transform.position.x, transform.position.y + 140, transform.position.z);
+                }
+                cam.orthographicSize = 240f;
+            }
+            else
+            {
+                if(startingWidth > 400)
+                {
+                    cam.transform.position = new Vector3(transform.position.x, transform.position.y - 140, transform.position.z);
+                }
+                cam.orthographicSize = 100f;
+            }
+            startingWidth = Screen.width;
+            List<Generator> generators = new List<Generator>();
+
+            foreach (Generator go in FindObjectsOfType<Generator>() as Generator[])
+            {
+                if (go.transform.position.x < 0)
+                {
+                    go.transform.position = new Vector3(-400, go.transform.position.y, go.transform.position.z);
+                }
+                else
+                {
+                    go.transform.position = new Vector3(400, go.transform.position.y, go.transform.position.z);
+                }
+            }
+            
         }
-        else
-        {
-            cam.orthographicSize = 100f;
-        }
+        
     }
 
     void Follow()
