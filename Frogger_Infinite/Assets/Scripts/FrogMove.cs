@@ -60,7 +60,7 @@ public class FrogMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(logsTouched);
+        /*Debug.Log(logsTouched);*/
         /*UpdateInput();*/
         /*UpdateMovement();*/
 
