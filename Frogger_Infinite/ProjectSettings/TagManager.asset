@@ -12,6 +12,7 @@ TagManager:
   - CheckPoint
   - Water
   - LimitPoints
+  - Music
   layers:
   - Default
   - TransparentFX
