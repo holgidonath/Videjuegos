@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class FrogMove : MonoBehaviour
 {
+    public AudioSource[] SoundFx;
     private float counter_check = 0;
     public Text counterText1;
     public Text counterText;
@@ -145,6 +146,7 @@ public class FrogMove : MonoBehaviour
                         _anmCtrl.SetBool("run", true);
                         running = true;
                         lookingHorizontal = 1;
+                        SoundFx[0].Play();
                         if (Input.GetAxisRaw("Horizontal") == 1f)
                         {
                             _anmCtrl.SetInteger("lookDir", 0);
@@ -183,6 +185,7 @@ public class FrogMove : MonoBehaviour
                         _anmCtrl.SetBool("run", true);
                         running = true;
                         lookingHorizontal = 0;
+                        SoundFx[0].Play();
                         if (Input.GetAxisRaw("Vertical") == 1f)
                         {
                             _anmCtrl.SetInteger("lookDir", 3);
@@ -367,6 +370,8 @@ public class FrogMove : MonoBehaviour
         }*/
         if (!dead) 
         { 
+            SoundFx[1].Play();
+            SoundFx[2].Stop();
             dead = true;
             GetComponent<SpriteRenderer>().enabled = false;
             lossMenu.SetActive(true);
