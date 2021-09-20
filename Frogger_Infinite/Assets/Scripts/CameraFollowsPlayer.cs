@@ -26,6 +26,14 @@ public class CameraFollowsPlayer : MonoBehaviour
     void Update()
     {
         Follow();
+        if (Screen.width > 400)
+        {
+            cam.orthographicSize = 240f;
+        }
+        else
+        {
+            cam.orthographicSize = 100f;
+        }
     }
 
     void Follow()
