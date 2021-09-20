@@ -23,6 +23,7 @@ public class LevelSpawner : MonoBehaviour
     {
         GameObject temp = Instantiate(level, nextSpawnPoint, Quaternion.identity);
         nextSpawnPoint = temp.transform.GetChild(0).transform.position;
+        GameObject.FindWithTag("Frog").GetComponent<FrogMove>().addLevel();
     }
     
 }

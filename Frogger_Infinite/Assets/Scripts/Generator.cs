@@ -16,10 +16,11 @@ public class Generator : MonoBehaviour
     private int minTTurtleIndex = 5;
     private int maxTTurtleIndex = 7;
     private int regularTurtleCounter = 0;
-    private float snakeProb = 0.1f;
-    private float crocodileProb = 0.1f;
+    private float snakeProb = 0f;
+    private float crocodileProb = 0f;
     private bool crocodileSpawned = false;
     public GameObject snake;
+    private float difficulty;
 
 
     bool active;
@@ -95,6 +96,8 @@ public class Generator : MonoBehaviour
                 }
 
             }
+            carScript.speed *= difficulty;
+
         }
         else if ((type == Type.logs))
         {
@@ -145,9 +148,8 @@ public class Generator : MonoBehaviour
                 if(Random.Range(0f,1f) <= snakeProb && !crocodileSpawned)
                 {
                     GameObject tempSnake = Instantiate(snake, temporaryObject.transform.position, Quaternion.identity);
-                    var snakeScript = tempSnake.GetComponent<Movement>();
                     tempSnake.transform.SetParent(temporaryObject.transform);
-
+                    
                 }
 
                 
@@ -183,6 +185,7 @@ public class Generator : MonoBehaviour
             {
                 crocodileSpawned = false;
             }
+            logScript.speed *= difficulty;
         }
         
         Invoke ("Generate", Random.Range (minTime,maxTime));
@@ -191,7 +194,8 @@ public class Generator : MonoBehaviour
     void Start()
     {
         type = (Type)transform.parent.GetComponent<LevelTile>().type;
-        if(Screen.width > 400)
+        var level = GameObject.FindWithTag("Frog").GetComponent<FrogMove>().levelCount;
+        if (Screen.width > 400)
         {
             if(transform.position.x < 0)
             {
@@ -216,7 +220,25 @@ public class Generator : MonoBehaviour
             }
         } else
         {
-            waterType = (WaterType)Random.Range(0, 4);
+            if(level < 5)
+            {
+                waterType = (WaterType)Random.Range(0, 3);
+            }
+            else if (level >= 5 && level  < 10)
+            {
+                waterType = (WaterType)Random.Range(0, 4);
+            }
+            else if(level >= 10)
+            {
+                snakeProb = 0.1f;
+                crocodileProb = 0.1f;
+            }
+            else if (level >= 15)
+            {
+                snakeProb *= difficulty;
+                crocodileProb *= difficulty;
+            }
+            
             if(waterType == WaterType.bigLog)
             {
                 minTime = 5f;
@@ -240,6 +262,9 @@ public class Generator : MonoBehaviour
                 maxTime = 3f;
             }
         }
+        difficulty = 1 + (level / 100);
+        minTime = minTime - (minTime * difficulty - minTime);
+        maxTime = maxTime - (maxTime * difficulty - maxTime);
         Generate();
     }
 
