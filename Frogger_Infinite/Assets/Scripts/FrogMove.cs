@@ -385,6 +385,7 @@ public class FrogMove : MonoBehaviour
         {
             counter += 2*counter/3;
             bonus.enabled = true;
+            SoundFx[3].Play();
         }
         else
         {
