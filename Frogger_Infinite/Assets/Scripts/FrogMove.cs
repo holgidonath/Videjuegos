@@ -371,7 +371,6 @@ public class FrogMove : MonoBehaviour
         if (!dead) 
         { 
             SoundFx[1].Play();
-            SoundFx[2].Stop();
             dead = true;
             GetComponent<SpriteRenderer>().enabled = false;
             lossMenu.SetActive(true);
@@ -385,7 +384,7 @@ public class FrogMove : MonoBehaviour
         {
             counter += 2*counter/3;
             bonus.enabled = true;
-            SoundFx[3].Play();
+            SoundFx[2].Play();
         }
         else
         {
