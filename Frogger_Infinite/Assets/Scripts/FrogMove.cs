@@ -31,7 +31,7 @@ public class FrogMove : MonoBehaviour
 
     private Camera cam;
 
-    private float tilesx = 19f;
+    private float tilesx = 20f;
     private float tilesy = 20f;
 
     private bool xAxisInUse = false;
