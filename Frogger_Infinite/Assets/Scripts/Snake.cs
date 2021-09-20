@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    private bool firstTurn = true;
     private GameObject log;
     private bool flip = false;
     public Transform target;
