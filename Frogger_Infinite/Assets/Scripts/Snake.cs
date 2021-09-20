@@ -26,20 +26,23 @@ public class Snake : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
             flip = true;
         }
-        start = new Vector3((logSprite.bounds.size.x / 2)*(-1), 0, 0);
-        end = new Vector3((logSprite.bounds.size.x / 2), 0, 0);
+        if(log.GetComponent<Movement>().speed > 0)
+        {
+            end = new Vector3(1000, 0, 0);
+            start = new Vector3(1000 * (-1), 0, 0);
+        }
+        else
+        {
+            start = new Vector3(1000, 0, 0);
+            end = new Vector3(1000 * (-1), 0, 0);
+        }
+        
         target.localPosition = end;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnTriggerEnter2D(Collider2D col)
     {
-        if(target != null)
-        {
-            float fixedSpeed = speed * Time.deltaTime;
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, target.localPosition, fixedSpeed);
-        }
-        if(transform.localPosition == target.localPosition)
+        if(col.gameObject.tag == "LimitPoints")
         {
             if (flip)
             {
@@ -52,6 +55,25 @@ public class Snake : MonoBehaviour
                 flip = true;
             }
             target.localPosition = (target.localPosition == start) ? end : start;
+
+
+        }
+    }
+    void Update()
+    {
+        if (target != null)
+        {
+            var fixedSpeed = speed * Time.deltaTime;
+            if (flip)
+            {
+                transform.localPosition += new Vector3(fixedSpeed, 0, 0);
+            }
+            else
+            {
+                transform.localPosition += new Vector3(-fixedSpeed, 0, 0);
+            }
+            
+
         }
     }
 }
