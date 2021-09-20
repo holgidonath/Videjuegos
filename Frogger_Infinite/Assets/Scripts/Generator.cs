@@ -16,8 +16,11 @@ public class Generator : MonoBehaviour
     private int minTTurtleIndex = 5;
     private int maxTTurtleIndex = 7;
     private int regularTurtleCounter = 0;
-    private float snakeProb = 0.3f;
+    private float snakeProb = 0.1f;
+    private float crocodileProb = 0.1f;
+    private bool crocodileSpawned = false;
     public GameObject snake;
+
 
     bool active;
 
@@ -128,8 +131,17 @@ public class Generator : MonoBehaviour
             }
             else
             {
-                temporaryObject = Instantiate(logs[(int)waterType], transform.position, Quaternion.identity);
-                if(Random.Range(0f,1f) < 1)
+                if (Random.Range(0f, 1f) <= crocodileProb)
+                {
+                    crocodileSpawned = true;
+                    temporaryObject = Instantiate(logs[(int)WaterType.crocodile], transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    temporaryObject = Instantiate(logs[(int)waterType], transform.position, Quaternion.identity);
+                }
+                
+                if(Random.Range(0f,1f) <= snakeProb && !crocodileSpawned)
                 {
                     
                     snake = Instantiate(snake, temporaryObject.transform.position, Quaternion.identity);
@@ -137,26 +149,39 @@ public class Generator : MonoBehaviour
                     snake.transform.SetParent(temporaryObject.transform);
 
                 }
+
+                
+
+
             }
             var logScript = temporaryObject.GetComponent<Movement>();
             if (transform.position.x > 0)
             {
                 logScript.speed = -50f;
+                if (crocodileSpawned)
+                {
+                    temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
+                }
             }
             else
             {
                 logScript.speed = 50f;
 
-
-                SpriteRenderer[] sprites = temporaryObject.GetComponentsInChildren<SpriteRenderer>();
-
-                for (int i = 0; i < sprites.Length; i++)
+                if (!crocodileSpawned)
                 {
-                    sprites[i].flipX = true;
+                    SpriteRenderer[] sprites = temporaryObject.GetComponentsInChildren<SpriteRenderer>();
+
+                    for (int i = 0; i < sprites.Length; i++)
+                    {
+                        sprites[i].flipX = true;
+                    }
                 }
 
 
-
+            }
+            if (crocodileSpawned)
+            {
+                crocodileSpawned = false;
             }
         }
         
