@@ -26,7 +26,7 @@ public class SinkingTurtle : MonoBehaviour
             toggleCollider();
         }
         else if (anim.GetCurrentAnimatorStateInfo(animLayer).IsName("Turtle Move") &&
-            anim.GetCurrentAnimatorStateInfo(animLayer).normalizedTime >= 0.1f)
+            anim.GetCurrentAnimatorStateInfo(animLayer).normalizedTime >= 0.000001f)
         {
             isSinking = false;
             toggleCollider();

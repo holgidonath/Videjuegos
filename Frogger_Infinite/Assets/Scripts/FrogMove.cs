@@ -224,6 +224,7 @@ public class FrogMove : MonoBehaviour
             if (col.gameObject.tag == "CheckPoint")
             {
                 AddPoint();
+                
             }
         }
 
@@ -264,7 +265,9 @@ public class FrogMove : MonoBehaviour
         {
             transform.parent = null;
             movePoint.parent = null;
+            
             logsTouched--;
+            
             if (col.gameObject.tag == "CheckPoint")
             {
                 bonus.enabled = false;
@@ -358,6 +361,7 @@ public class FrogMove : MonoBehaviour
                }
            }
        }*/
+
 
     public void Respawn()
     {
