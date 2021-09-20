@@ -48,12 +48,20 @@ public class FrogMove : MonoBehaviour
     {
         resolution = Screen.currentResolution;
         _anmCtrl = GetComponent<Animator>();
-        transform.position = new Vector3(0, -(Screen.height / 2) + 2f, 0);
+        
         /*Debug.Log(Screen.width + " x " + Screen.height);*/
         movePoint.parent = null;
         cam = Camera.main;
         levelsToDestroy = new List<GameObject>();
         lookingHorizontal = 1;
+        transform.position = new Vector3(0, -98f, 0);
+        if (Screen.width > 400)
+        {
+            
+        }
+        else
+        {
+        }
 
     }
 

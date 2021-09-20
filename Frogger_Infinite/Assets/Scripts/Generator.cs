@@ -191,6 +191,18 @@ public class Generator : MonoBehaviour
     void Start()
     {
         type = (Type)transform.parent.GetComponent<LevelTile>().type;
+        if(Screen.width > 400)
+        {
+            if(transform.position.x < 0)
+            {
+                transform.position = new Vector3(-400, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(400, transform.position.y, transform.position.z);
+            }
+            
+        }
         if(type == Type.cars)
         {
             carType = (CarType)Random.Range(0, 5);

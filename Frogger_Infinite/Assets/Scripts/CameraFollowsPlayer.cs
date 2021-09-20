@@ -8,7 +8,20 @@ public class CameraFollowsPlayer : MonoBehaviour
     public Vector3 offset;
     [Range(1, 10)]
     public float smoothFactor;
+    public Camera cam;
 
+    void Start()
+    {
+        if(Screen.width > 400)
+        {
+            transform.position = new Vector3(transform.position.x, 140, transform.position.z);
+            cam.orthographicSize = 240f;
+        }
+        else
+        {
+            cam.orthographicSize = 100f;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
