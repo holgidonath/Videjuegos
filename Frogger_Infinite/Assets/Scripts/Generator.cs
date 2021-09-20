@@ -55,6 +55,7 @@ public class Generator : MonoBehaviour
     void Generate()
     {
         GameObject temporaryObject;
+        
         if (type == Type.cars)
         {
             temporaryObject = Instantiate (cars[(int)carType], transform.position, Quaternion.identity);
@@ -143,10 +144,9 @@ public class Generator : MonoBehaviour
                 
                 if(Random.Range(0f,1f) <= snakeProb && !crocodileSpawned)
                 {
-                    
-                    snake = Instantiate(snake, temporaryObject.transform.position, Quaternion.identity);
-                    var snakeScript = snake.GetComponent<Movement>();
-                    snake.transform.SetParent(temporaryObject.transform);
+                    GameObject tempSnake = Instantiate(snake, temporaryObject.transform.position, Quaternion.identity);
+                    var snakeScript = tempSnake.GetComponent<Movement>();
+                    tempSnake.transform.SetParent(temporaryObject.transform);
 
                 }
 
