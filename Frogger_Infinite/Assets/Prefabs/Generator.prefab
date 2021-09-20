@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   carType: 0
-  logType: 0
+  waterType: 0
   minTime: 1.5
   maxTime: 3
   cars:
@@ -63,3 +63,4 @@ MonoBehaviour:
   - {fileID: 7817708789121795727, guid: 3e036257e9e7df440b267482962a4c72, type: 3}
   - {fileID: 1609544762456762283, guid: e8c6a71b8c3ff764b9c29b70d49622b0, type: 3}
   - {fileID: 1219363506275565889, guid: c62067fc46cab3e46ab2395da8dd2ad7, type: 3}
+  snake: {fileID: 6186138273683875764, guid: 7c4f79c1386f96949b56eba283b363a7, type: 3}

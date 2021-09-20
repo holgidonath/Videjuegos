@@ -16,6 +16,8 @@ public class Generator : MonoBehaviour
     private int minTTurtleIndex = 5;
     private int maxTTurtleIndex = 7;
     private int regularTurtleCounter = 0;
+    private float snakeProb = 0.3f;
+    public GameObject snake;
 
     bool active;
 
@@ -127,7 +129,14 @@ public class Generator : MonoBehaviour
             else
             {
                 temporaryObject = Instantiate(logs[(int)waterType], transform.position, Quaternion.identity);
+                if(Random.Range(0f,1f) < 1)
+                {
+                    
+                    snake = Instantiate(snake, temporaryObject.transform.position, Quaternion.identity);
+                    var snakeScript = snake.GetComponent<Movement>();
+                    snake.transform.SetParent(temporaryObject.transform);
 
+                }
             }
             var logScript = temporaryObject.GetComponent<Movement>();
             if (transform.position.x > 0)
