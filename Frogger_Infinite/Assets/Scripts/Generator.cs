@@ -6,6 +6,7 @@ public class Generator : MonoBehaviour
 {
     public Type type;
     public CarType carType;
+    public LogType logType;
     public float minTime, maxTime;
     public GameObject [] cars;
     public GameObject [] logs;
@@ -28,6 +29,13 @@ public class Generator : MonoBehaviour
         yellowCar
     }
 
+    public enum LogType
+    {
+        bigLog,
+        mediumLog,
+        smallLog
+    }
+
 
     void Generate()
     {
@@ -43,23 +51,29 @@ public class Generator : MonoBehaviour
                     temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
                     if (carType == CarType.whiteCar)
                     {
-                        minTime = 0.5f;
-                        maxTime = 2f;
+                        
                         carScript.speed = -150f;
                     }
                 }
-                
+                if (carType == CarType.truck)
+                {
+                    carScript.speed = -35f;
+                }
+
             } else
             {
                 carScript.speed = 50f;
                 if (carType == CarType.pinkCar || carType == CarType.truck || carType == CarType.yellowCar)
                 {
                     temporaryObject.GetComponent<SpriteRenderer>().flipX = true;
+                    if(carType == CarType.truck)
+                    {
+                        carScript.speed = 35f;
+                    }
                 }
                 if (carType == CarType.whiteCar)
                 {
-                    minTime = 0.5f;
-                    maxTime = 2f;
+                    
                     carScript.speed = 150f;
                 }
 
@@ -67,10 +81,8 @@ public class Generator : MonoBehaviour
         }
         else if ((type == Type.logs))
         {
-            GameObject temporaryObject = Instantiate (logs [Random.Range(0,logs.Length)], transform.position, Quaternion.identity);
+            GameObject temporaryObject = Instantiate (logs [(int)logType], transform.position, Quaternion.identity);
             var logScript = temporaryObject.GetComponent<Movement>();
-            maxTime = 5f;
-            minTime = 3f;
             if (transform.position.x > 0)
             {
                 logScript.speed = -50f;
@@ -92,8 +104,29 @@ public class Generator : MonoBehaviour
             carType = (CarType)Random.Range(0, 5);
             if(carType == CarType.whiteCar)
             {
-                minTime = 0.3f;
-                maxTime = 1f;
+                minTime = 0.5f;
+                maxTime = 2f;
+            } else if (carType == CarType.truck) {
+                minTime = 2f;
+                maxTime = 5f;
+            }
+        } else
+        {
+            logType = (LogType)Random.Range(0, 3);
+            if(logType == LogType.bigLog)
+            {
+                minTime = 5f;
+                maxTime = 8f;
+            }
+            else if (logType == LogType.mediumLog)
+            {
+                minTime = 4f;
+                maxTime = 7f;
+            }
+            else
+            {
+                minTime = 3f;
+                maxTime = 6f;
             }
         }
         Generate();

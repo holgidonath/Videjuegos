@@ -49,7 +49,7 @@ public class FrogMove : MonoBehaviour
         resolution = Screen.currentResolution;
         _anmCtrl = GetComponent<Animator>();
         transform.position = new Vector3(0, -(Screen.height / 2) + 2f, 0);
-        Debug.Log(Screen.width + " x " + Screen.height);
+        /*Debug.Log(Screen.width + " x " + Screen.height);*/
         movePoint.parent = null;
         cam = Camera.main;
         levelsToDestroy = new List<GameObject>();
@@ -60,6 +60,7 @@ public class FrogMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(logsTouched);
         /*UpdateInput();*/
         /*UpdateMovement();*/
 
@@ -209,7 +210,7 @@ public class FrogMove : MonoBehaviour
         else if (col.gameObject.tag == "Platform" || col.gameObject.tag == "CheckPoint")
         {
             logsTouched++;
-            if (col.gameObject.tag == "Checkpoint")
+            if (col.gameObject.tag == "CheckPoint")
             {
                 AddPoint();
             }
@@ -226,14 +227,21 @@ public class FrogMove : MonoBehaviour
             {
                 movePoint.parent = col.transform;
                 transform.parent = col.transform;
-            }else
+            }
+            else
             {
-                transform.parent = null;
-                movePoint.parent = null;
+                if((Mathf.Abs(movePoint.position.x) <= ((Screen.width / 2))) && Mathf.Sign(movePoint.position.x) != Mathf.Sign(col.transform.gameObject.GetComponent<Movement>().speed))
+                {
+                    movePoint.parent = col.transform;
+                    transform.parent = col.transform;
+                }else { 
+                    transform.parent = null;
+                    movePoint.parent = null;
+                }
             }
 
         }
-        else if (logsTouched == 0 && col.gameObject.tag == "Water" && !dead)
+        else if (logsTouched == 0 && col.gameObject.tag == "Water" && !dead && !running)
         {
             Respawn();
         }
@@ -241,19 +249,19 @@ public class FrogMove : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Platform" && !dead)
+        if ((col.gameObject.tag == "Platform" || col.gameObject.tag == "CheckPoint" ) && !dead)
         {
             transform.parent = null;
             movePoint.parent = null;
             logsTouched--;
-        } 
-        else if (col.gameObject.tag == "CheckPoint")
-        {
-            logsTouched--;
+            if (col.gameObject.tag == "CheckPoint")
+            {
+                bonus.enabled = false;
+                Destroy(col);
+            }
         }
         else if (col.gameObject.tag == "Level" && !dead)
         {
-            Debug.Log("level added");
             if (!levelsToDestroy.Contains(col.gameObject))
             {
                 levelsToDestroy.Add(col.gameObject);
@@ -265,11 +273,6 @@ public class FrogMove : MonoBehaviour
                 levelsToDestroy.RemoveAt(0);
                 Destroy(temp);
             }
-        }
-        if (col.gameObject.tag == "Checkpoint")
-        {
-           bonus.enabled = false;
-           Destroy(col);
         }
 
     }
