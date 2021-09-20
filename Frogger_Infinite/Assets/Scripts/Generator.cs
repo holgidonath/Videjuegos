@@ -102,7 +102,7 @@ public class Generator : MonoBehaviour
                 temporaryObject = Instantiate(logs[turtleIndex], transform.position, Quaternion.identity);
                 if (turtleIndex == (int)WaterType.mDoubleT || turtleIndex == (int)WaterType.mTripleT)
                 {
-                    if(regularTurtleCounter == 2)
+                    if(regularTurtleCounter == 1)
                     {
                         regularTurtleCounter = 0;
                         turtleIndex++;
