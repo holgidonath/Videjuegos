@@ -6,11 +6,16 @@ public class Generator : MonoBehaviour
 {
     public Type type;
     public CarType carType;
-    public LogType logType;
+    public WaterType waterType;
     public float minTime, maxTime;
     public GameObject [] cars;
     public GameObject [] logs;
-
+    private int turtleIndex = 3;
+    private int minDTurtleIndex = 3;
+    private int maxDTurtleIndex = 5;
+    private int minTTurtleIndex = 5;
+    private int maxTTurtleIndex = 7;
+    private int regularTurtleCounter = 0;
 
     bool active;
 
@@ -29,19 +34,25 @@ public class Generator : MonoBehaviour
         yellowCar
     }
 
-    public enum LogType
+    public enum WaterType
     {
         bigLog,
         mediumLog,
-        smallLog
+        smallLog,
+        msDobuleT,
+        mDoubleT,
+        msTripleT,
+        mTripleT,
+        crocodile
     }
 
 
     void Generate()
     {
+        GameObject temporaryObject;
         if (type == Type.cars)
         {
-            GameObject temporaryObject = Instantiate (cars[(int)carType], transform.position, Quaternion.identity);
+            temporaryObject = Instantiate (cars[(int)carType], transform.position, Quaternion.identity);
             var carScript = temporaryObject.GetComponent<Movement>();
             if(transform.position.x > 0)
             {
@@ -81,7 +92,43 @@ public class Generator : MonoBehaviour
         }
         else if ((type == Type.logs))
         {
-            GameObject temporaryObject = Instantiate (logs [(int)logType], transform.position, Quaternion.identity);
+            if (waterType == WaterType.msDobuleT || waterType == WaterType.msTripleT) //turtle state
+            {
+                temporaryObject = Instantiate(logs[turtleIndex], transform.position, Quaternion.identity);
+                if (turtleIndex == (int)WaterType.mDoubleT || turtleIndex == (int)WaterType.mTripleT)
+                {
+                    if(regularTurtleCounter == 1)
+                    {
+                        regularTurtleCounter = 0;
+                        turtleIndex++;
+                    }
+                    regularTurtleCounter++;
+                }
+                else
+                {
+                    turtleIndex++;
+                }
+                if (waterType == WaterType.msDobuleT)
+                {
+                    if (turtleIndex == maxDTurtleIndex)
+                    {
+                        turtleIndex = minDTurtleIndex;
+                    }
+
+                } else
+                {
+                    if (turtleIndex == maxTTurtleIndex)
+                    {
+                        turtleIndex = minTTurtleIndex;
+                    }
+                }
+
+            }
+            else
+            {
+                temporaryObject = Instantiate(logs[(int)waterType], transform.position, Quaternion.identity);
+
+            }
             var logScript = temporaryObject.GetComponent<Movement>();
             if (transform.position.x > 0)
             {
@@ -90,6 +137,17 @@ public class Generator : MonoBehaviour
             else
             {
                 logScript.speed = 50f;
+
+
+                SpriteRenderer[] sprites = temporaryObject.GetComponentsInChildren<SpriteRenderer>();
+
+                for (int i = 0; i < sprites.Length; i++)
+                {
+                    sprites[i].flipX = true;
+                }
+
+
+
             }
         }
         
@@ -112,21 +170,28 @@ public class Generator : MonoBehaviour
             }
         } else
         {
-            logType = (LogType)Random.Range(0, 3);
-            if(logType == LogType.bigLog)
+            waterType = (WaterType)Random.Range(0, 4);
+            if(waterType == WaterType.bigLog)
             {
                 minTime = 5f;
                 maxTime = 8f;
             }
-            else if (logType == LogType.mediumLog)
+            else if (waterType == WaterType.mediumLog)
             {
                 minTime = 4f;
                 maxTime = 7f;
             }
-            else
+            else if (waterType == WaterType.smallLog)
             {
                 minTime = 3f;
                 maxTime = 6f;
+            }
+            else
+            {
+                waterType = (WaterType)Random.Range(0, 2) == 0 ? WaterType.msDobuleT : WaterType.msTripleT;
+                turtleIndex = waterType == WaterType.msDobuleT ? minDTurtleIndex : minTTurtleIndex;
+                minTime = 1.5f;
+                maxTime = 3f;
             }
         }
         Generate();

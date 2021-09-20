@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   carType: 0
+  logType: 0
   minTime: 1.5
   maxTime: 3
   cars:
@@ -57,3 +58,8 @@ MonoBehaviour:
   - {fileID: 1814521750618299658, guid: 930172665f99a2e46bf03d0534882076, type: 3}
   - {fileID: 1891040649344807283, guid: 4dbd807b08905bc47944a729c5eebce1, type: 3}
   - {fileID: 4342377271032470913, guid: e74d14c6494bb294d8225f65771d47fe, type: 3}
+  - {fileID: 1499874182040376928, guid: 9e24f37005cb2a840a08bb25127b6be7, type: 3}
+  - {fileID: 269686701254338322, guid: a3f73faf5bf531b4fb4911a96bdc1454, type: 3}
+  - {fileID: 7817708789121795727, guid: 3e036257e9e7df440b267482962a4c72, type: 3}
+  - {fileID: 1609544762456762283, guid: e8c6a71b8c3ff764b9c29b70d49622b0, type: 3}
+  - {fileID: 1219363506275565889, guid: c62067fc46cab3e46ab2395da8dd2ad7, type: 3}
