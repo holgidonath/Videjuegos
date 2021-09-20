@@ -56,14 +56,14 @@ public class FrogMove : MonoBehaviour
         levelsToDestroy = new List<GameObject>();
         lookingHorizontal = 1;
         transform.position = new Vector3(0, -98f, 0);
-        if (Screen.width > 400)
-        {
-            
-        }
-        else
-        {
-        }
+        StartCoroutine(waiter());
+    }
 
+    IEnumerator waiter()
+    {
+        dead = true;
+        yield return new WaitForSeconds(2f);
+        dead = false;
     }
 
     // Update is called once per frame
