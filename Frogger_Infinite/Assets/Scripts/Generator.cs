@@ -212,7 +212,7 @@ public class Generator : MonoBehaviour
             carType = (CarType)Random.Range(0, 5);
             if(carType == CarType.whiteCar)
             {
-                minTime = 0.5f;
+                minTime = 1f;
                 maxTime = 2f;
             } else if (carType == CarType.truck) {
                 minTime = 2f;
@@ -224,16 +224,17 @@ public class Generator : MonoBehaviour
             {
                 waterType = (WaterType)Random.Range(0, 3);
             }
-            else if (level >= 5 && level  < 10)
+            if (level >= 5)
             {
                 waterType = (WaterType)Random.Range(0, 4);
             }
-            else if(level >= 10)
+            if(level >= 10 )
             {
+                waterType = (WaterType)Random.Range(0, 4);
                 snakeProb = 0.1f;
                 crocodileProb = 0.1f;
             }
-            else if (level >= 15)
+            if (level >= 15)
             {
                 snakeProb *= difficulty;
                 crocodileProb *= difficulty;
@@ -263,8 +264,11 @@ public class Generator : MonoBehaviour
             }
         }
         difficulty = 1 + (level / 100);
+        
         minTime = minTime - (minTime * difficulty - minTime);
         maxTime = maxTime - (maxTime * difficulty - maxTime);
+       
+        
         Generate();
     }
 
